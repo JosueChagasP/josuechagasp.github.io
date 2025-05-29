@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josué Chagas | Desenvolvedor Front-end</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --accent-color: #3b82f6;
+            --text-primary: #1f2937;
+            --text-secondary: #6b7280;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+            --shadow: 0 10px 25px rgba(0,0,0,0.1);
+            --shadow-hover: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+        }
+
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--bg-light) 0%, #e0f2fe 100%);
+            padding: 0 2rem;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text .subtitle {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            color: var(--text-secondary);
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--secondary-color);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .hero-image {
+            display: flex;
+            justify-content: center;
+        }
+
+        .hero-avatar {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            color: white;
+            box-shadow: var(--shadow);
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 3rem;
+            color: var(--text-primary);
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        /* Projects Section */
+        .projects {
+            background: var(--bg-light);
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .project-header {
+            padding: 2rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-subtitle {
+            opacity: 0.9;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-description {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .tech-tag {
+            background: var(--bg-light);
+            color: var(--primary-color);
+            padding: 0.3rem 0.8rem;
+            border-radius: 16px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .project-features {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .project-features li {
+            padding: 0.3rem 0;
+            color: var(--text-secondary);
+        }
+
+        .project-features li:before {
+            content: "✓";
+            color: var(--primary-color);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-category {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .skill-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .skill-list {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* Contact Section */
+        .contact {
+            background: var(--bg-light);
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .contact-form {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .typing-animation {
+            border-right: 2px solid var(--primary-color);
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { border-color: var(--primary-color); }
+            51%, 100% { border-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">Josué Chagas</div>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#projects">Projetos</a></li>
+                <li><a href="#skills">Habilidades</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Josué Chagas</h1>
+                <p class="subtitle typing-animation">Desenvolvedor Front-end</p>
+                <p>Transformo ideias em experiências digitais incríveis. Especializado em criar aplicações web modernas, interativas e responsivas que encantam usuários e geram resultados.</p>
+                <div class="cta-buttons">
+                    <a href="#projects" class="btn btn-primary">
+                        <i class="fas fa-code"></i>
+                        Ver Projetos
+                    </a>
+                    <a href="https://wa.me/5527988812995?text=Olá!%20Vi%20seu%20portfólio%20e%20gostaria%20de%20conversar%20sobre%20uma%20oportunidade." target="_blank" class="btn btn-outline">
+                        <i class="fab fa-whatsapp"></i>
+                        WhatsApp
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="hero-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">Sobre Mim</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Sou um desenvolvedor Front-end apaixonado por criar soluções digitais que fazem a diferença. Com foco em qualidade, performance e experiência do usuário, desenvolvo aplicações que combinam funcionalidade e design elegante.</p>
+                
+                <p>Minha jornada na programação é marcada pelo aprendizado contínuo e pela busca constante por desafios que me permitam crescer profissionalmente. Desenvolvi desde jogos MMORPG open source até páginas de vendas otimizadas para conversão, sempre combinando habilidades técnicas com estratégias de marketing digital.</p>
+                
+                <p>Tenho experiência sólida em JavaScript, HTML5, CSS3 e no desenvolvimento de interfaces responsivas e interativas. Meu objetivo é sempre entregar código limpo, bem estruturado e fácil de manter.</p>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-number">365+</span>
+                    <span class="stat-label">Horas Programando</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <span class="stat-label">Tecnologias</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Projetos Completos</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">Dedicação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="section-title">Meus Projetos</h2>
+        <div class="projects-grid">
+            
+            <!-- Páginas de Vendas -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">💰 Páginas de Vendas</h3>
+                    <p class="project-subtitle">Copywriting + Programação</p>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Dezenas de páginas de vendas desenvolvidas combinando técnicas avançadas de copywriting com programação front-end. Focadas em conversão, persuasão e experiência do usuário para maximizar resultados comerciais.
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Copywriting</span>
+                        <span class="tech-tag">Marketing Digital</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Técnicas de copywriting persuasivo</li>
+                        <li>Design focado em conversão</li>
+                        <li>Call-to-actions estratégicos</li>
+                        <li>Psicologia de vendas aplicada</li>
+                        <li>Responsividade total</li>
+                        <li>Otimização para performance</li>
+                        <li>A/B testing considerations</li>
+                        <li>Funis de vendas completos</li>
+                    </ul>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" onclick="alert('📄 Portfolio de Páginas de Vendas em PDF\\n\\n✅ Mentoria Aguia (Mosie Schulz)\\n✅ Dezenas de outras páginas\\n✅ Diferentes nichos e estilos\\n✅ Técnicas avançadas de copywriting\\n\\n🔗 Entre em contato para ver o portfolio completo!')" class="btn btn-primary">
+                            <i class="fas fa-file-pdf"></i>
+                            Ver Páginas (PDF)
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- War Destiny Game -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">🎮 War Destiny</h3>
+                    <p class="project-subtitle">Jogo Open Source + Sistema de Indicação</p>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Jogo MMORPG inspirado no clássico WYD (With Your Destiny), desenvolvido como projeto open source. Inclui sistema completo de indicação remunerada e site profissional do servidor, demonstrando habilidades em desenvolvimento de jogos, sistemas monetários e marketing digital.
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">Game Development</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Open Source</span>
+                        <span class="tech-tag">Landing Page</span>
+                        <span class="tech-tag">Sistema Monetário</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>MMORPG baseado no clássico WYD</li>
+                        <li>Sistema de indicação remunerada</li>
+                        <li>Site profissional do servidor</li>
+                        <li>Landing page de conversão</li>
+                        <li>Arquitetura escalável</li>
+                        <li>Código open source</li>
+                        <li>Sistema de usuários e progressão</li>
+                        <li>Branding e identidade visual</li>
+                    </ul>
+                    
+                    <div class="cta-buttons">
+                        <a href="https://youtu.be/nN76dKkJ6oE" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-play"></i>
+                            Assistir Explicação
+                        </a>
+                        <a href="#" onclick="alert('🎮 War Destiny - Ecossistema Completo\\n\\n✅ Jogo MMORPG funcional\\n✅ Sistema de indicação remunerada\\n✅ Site profissional do servidor\\n✅ Landing page de conversão\\n✅ Branding completo\\n\\n🔗 Entre em contato para ver o projeto completo!')" class="btn btn-outline">
+                            <i class="fas fa-globe"></i>
+                            Ver Site do Servidor
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calculadora Ultimate -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">🔢 Calculadora Ultimate</h3>
+                    <p class="project-subtitle">Aplicação Multifuncional Avançada</p>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Calculadora profissional com 3 modos distintos, visual cyberpunk futurístico e integração com APIs de moedas em tempo real. Projeto que demonstra domínio completo de JavaScript avançado.
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript ES6+</span>
+                        <span class="tech-tag">Web APIs</span>
+                        <span class="tech-tag">LocalStorage</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>3 Modos: Básica, Científica, Negócios</li>
+                        <li>Histórico inteligente dos últimos 10 cálculos</li>
+                        <li>Suporte completo ao teclado físico</li>
+                        <li>Sistema de temas (claro/escuro)</li>
+                        <li>Efeitos sonoros personalizados</li>
+                        <li>Vibração responsiva no mobile</li>
+                        <li>API de moedas em tempo real</li>
+                        <li>Animações avançadas e fluidas</li>
+                    </ul>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Ver Demo
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fab fa-github"></i>
+                            Código
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- To-Do List Épica -->
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">📝 To-Do List Épica</h3>
+                    <p class="project-subtitle">Sistema Gamificado Completo</p>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Aplicação avançada de gerenciamento de tarefas com sistema completo de gamificação, incluindo XP, levels, badges e streak. Demonstra arquitetura complexa e UX excepcional.
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3 Grid</span>
+                        <span class="tech-tag">JavaScript ES6+</span>
+                        <span class="tech-tag">LocalStorage</span>
+                        <span class="tech-tag">Date API</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Sistema de categorias com ícones (🏠💼📚💪📌)</li>
+                        <li>Prioridades com efeitos visuais épicos</li>
+                        <li>Countdown em tempo real para prazos</li>
+                        <li>Busca inteligente com highlight</li>
+                        <li>Filtros múltiplos avançados</li>
+                        <li>Gamificação: XP, 7 Levels, 8 Badges</li>
+                        <li>Sistema de Streak (dias consecutivos)</li>
+                        <li>Dashboard visual interativo</li>
+                    </ul>
+                    
+                    <div class="cta-buttons">
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-external-link-alt"></i>
+                            Ver Demo
+                        </a>
+                        <a href="#" class="btn btn-outline">
+                            <i class="fab fa-github"></i>
+                            Código
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <h2 class="section-title">Habilidades Técnicas</h2>
+        <div class="skills-grid">
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fab fa-html5"></i>
+                </div>
+                <h3 class="skill-title">Front-end</h3>
+                <div class="skill-list">
+                    HTML5 Semântico<br>
+                    CSS3 + Grid + Flexbox<br>
+                    JavaScript ES6+<br>
+                    Responsividade<br>
+                    Animações CSS
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-cogs"></i>
+                </div>
+                <h3 class="skill-title">Ferramentas</h3>
+                <div class="skill-list">
+                    Web APIs<br>
+                    LocalStorage<br>
+                    Fetch API<br>
+                    Git/GitHub<br>
+                    Debug Avançado
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-bullhorn"></i>
+                </div>
+                <h3 class="skill-title">Marketing Digital</h3>
+                <div class="skill-list">
+                    Copywriting Persuasivo<br>
+                    Páginas de Vendas<br>
+                    Psicologia de Vendas<br>
+                    Call-to-Actions<br>
+                    Conversão Otimizada
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-gamepad"></i>
+                </div>
+                <h3 class="skill-title">Game Dev</h3>
+                <div class="skill-list">
+                    MMORPG Development<br>
+                    Sistema Monetário<br>
+                    Open Source<br>
+                    Arquitetura Escalável<br>
+                    Comunidade Dev
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="skill-title">Especialidades</h3>
+                <div class="skill-list">
+                    Gamificação<br>
+                    UX/UI Design<br>
+                    Performance<br>
+                    Código Limpo<br>
+                    Resolução de Problemas
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-icon">
+                    <i class="fas fa-rocket"></i>
+                </div>
+                <h3 class="skill-title">Em Breve</h3>
+                <div class="skill-list">
+                    React.js<br>
+                    Node.js<br>
+                    MongoDB<br>
+                    TypeScript<br>
+                    Full-stack
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="section-title">Vamos Trabalhar Juntos?</h2>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h3>Entre em Contato</h3>
+                <p>Estou sempre aberto a novos desafios e oportunidades. Se você tem um projeto em mente ou quer conversar sobre desenvolvimento, ficarei feliz em ajudar!</p>
+                
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>josuepereirajp7@gmail.com</span>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>(27) 98881-2995</span>
+                </div>
+                
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>Salvador, Bahia - Brasil</span>
+                </div>
+            </div>
+            
+            <form class="contact-form">
+                <div class="form-group">
+                    <label for="name">Nome *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="subject">Assunto</label>
+                    <input type="text" id="subject" name="subject">
+                </div>
+                
+                <div class="form-group">
+                    <label for="message">Mensagem *</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-paper-plane"></i>
+                    Enviar Mensagem
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-linkedin"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+        </div>
+        <p>&copy; 2025 Josué Chagas. Todos os direitos reservados.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling para navegação
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Typing animation
+        const subtitle = document.querySelector('.typing-animation');
+        const texts = ['Desenvolvedor Front-end', 'Criador de Experiências', 'Solucionador de Problemas'];
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+
+        function typeEffect() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                subtitle.textContent = currentText.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                subtitle.textContent = currentText.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentText.length) {
+                typeSpeed = 2000;
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                textIndex = (textIndex + 1) % texts.length;
+                typeSpeed = 500;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        // Iniciar typing animation
+        setTimeout(typeEffect, 1000);
+
+        // Formulário de contato
+        document.querySelector('.contact-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simulação de envio
+            const button = this.querySelector('button');
+            const originalText = button.innerHTML;
+            
+            button.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+            button.disabled = true;
+            
+            setTimeout(() => {
+                button.innerHTML = '<i class="fas fa-check"></i> Mensagem Enviada!';
+                button.style.background = '#10b981';
+                
+                setTimeout(() => {
+                    button.innerHTML = originalText;
+                    button.style.background = '';
+                    button.disabled = false;
+                    this.reset();
+                }, 2000);
+            }, 2000);
+        });
+
+        // Animação de entrada dos elementos
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observar elementos para animação
+        document.querySelectorAll('.project-card, .skill-category, .stat-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
