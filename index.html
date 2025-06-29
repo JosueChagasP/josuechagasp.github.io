@@ -75,13 +75,14 @@
             color: var(--primary-color);
         }
 
-        /* Hero Section */
+        /* Hero Section - CORRIGIDO */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
             background: linear-gradient(135deg, var(--bg-light) 0%, #e0f2fe 100%);
             padding: 0 2rem;
+            padding-top: 80px; /* Espaço para o header fixo */
         }
 
         .hero-content {
@@ -91,6 +92,7 @@
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
             align-items: center;
+            width: 100%;
         }
 
         .hero-text h1 {
@@ -156,9 +158,12 @@
             color: white;
         }
 
+        /* Hero Image - CORRIGIDO */
         .hero-image {
             display: flex;
             justify-content: center;
+            align-items: center;
+            position: relative;
         }
 
         .hero-avatar {
@@ -172,6 +177,29 @@
             font-size: 8rem;
             color: white;
             box-shadow: var(--shadow);
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Se você quiser usar uma imagem de perfil real */
+        .hero-avatar.with-image {
+            background-image: url('foto-perfil.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        /* Fallback com ícone quando não há imagem */
+        .hero-avatar::before {
+            content: "\f007"; /* FontAwesome user icon */
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 8rem;
+            color: white;
+        }
+
+        .hero-avatar.with-image::before {
+            display: none;
         }
 
         /* Sections */
@@ -431,10 +459,14 @@
             color: var(--accent-color);
         }
 
-        /* Responsive */
+        /* Responsive - MELHORADO */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
+            }
+
+            .hero {
+                padding-top: 100px;
             }
 
             .hero-content {
@@ -447,6 +479,16 @@
                 font-size: 2.5rem;
             }
 
+            .hero-avatar {
+                width: 250px;
+                height: 250px;
+                font-size: 6rem;
+            }
+
+            .hero-avatar::before {
+                font-size: 6rem;
+            }
+
             .about-content,
             .contact-content {
                 grid-template-columns: 1fr;
@@ -455,6 +497,10 @@
             .cta-buttons {
                 flex-direction: column;
                 align-items: center;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -518,8 +564,12 @@
                     </a>
                 </div>
             </div>
-            <div class="hero-avatar" style="background-image: url('foto-perfil.jpeg'); background-size: cover; background-position: center;">
-</div>
+            <div class="hero-image">
+                <!-- Opção 1: Com imagem de perfil (descomente se tiver a imagem) -->
+                <!-- <div class="hero-avatar with-image"></div> -->
+                
+                <!-- Opção 2: Sem imagem (usando ícone) -->
+                <div class="hero-avatar"></div>
             </div>
         </div>
     </section>
@@ -592,10 +642,10 @@
                     </ul>
                     
                     <div class="cta-buttons">
-                        <a href="pag-vendas.png" target="_blank" class="btn btn-primary">
-    <i class="fas fa-image"></i>
-    Ver Página de Vendas
-</a>
+                        <a href="#" class="btn btn-primary">
+                            <i class="fas fa-image"></i>
+                            Ver Página de Vendas
+                        </a>
                     </div>
                 </div>
             </div>
@@ -635,60 +685,58 @@
                             <i class="fas fa-play"></i>
                             Assistir Explicação
                         </a>
-                        <a href="paggame.jpg" target="_blank" class="btn btn-outline">
-    <i class="fas fa-image"></i>
-    Ver Página do Jogo
-</a>
-                            Ver Site do Servidor
+                        <a href="#" class="btn btn-outline">
+                            <i class="fas fa-image"></i>
+                            Ver Página do Jogo
                         </a>
                     </div>
                 </div>
             </div>
 
-            
-
             <!-- To-Do List Épica -->
-<div class="project-card">
-    <div class="project-header">
-        <h3 class="project-title">📝 To-Do List Épica</h3>
-        <p class="project-subtitle">Sistema Gamificado com Login</p>
-    </div>
-    <div class="project-content">
-        <p class="project-description">
-            Aplicação avançada de gerenciamento de tarefas com sistema completo de login, gamificação épica e efeitos visuais impressionantes. Inclui XP, levels, badges, prioridades com animações e countdown em tempo real.
-        </p>
-        
-        <div class="tech-stack">
-            <span class="tech-tag">HTML5</span>
-            <span class="tech-tag">CSS3 Avançado</span>
-            <span class="tech-tag">JavaScript ES6+</span>
-            <span class="tech-tag">Sistema de Login</span>
-            <span class="tech-tag">Gamificação</span>
+            <div class="project-card">
+                <div class="project-header">
+                    <h3 class="project-title">📝 To-Do List Épica</h3>
+                    <p class="project-subtitle">Sistema Gamificado com Login</p>
+                </div>
+                <div class="project-content">
+                    <p class="project-description">
+                        Aplicação avançada de gerenciamento de tarefas com sistema completo de login, gamificação épica e efeitos visuais impressionantes. Inclui XP, levels, badges, prioridades com animações e countdown em tempo real.
+                    </p>
+                    
+                    <div class="tech-stack">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3 Avançado</span>
+                        <span class="tech-tag">JavaScript ES6+</span>
+                        <span class="tech-tag">Sistema de Login</span>
+                        <span class="tech-tag">Gamificação</span>
+                    </div>
+                    
+                    <ul class="project-features">
+                        <li>Sistema de login e contas de usuário</li>
+                        <li>Gamificação completa (XP, 7 levels, 8 badges)</li>
+                        <li>Prioridades épicas com efeitos visuais</li>
+                        <li>Countdown em tempo real para prazos</li>
+                        <li>Sistema de busca inteligente</li>
+                        <li>Filtros múltiplos avançados</li>
+                        <li>Dashboard visual interativo</li>
+                        <li>Animações e micro-interações</li>
+                    </ul>
+                    
+                    <div class="cta-buttons">
+                        <a href="https://josuechagasp.github.io/todo-list-epica" target="_blank" class="btn btn-primary">
+                            <i class="fas fa-play"></i>
+                            Demo Ao Vivo
+                        </a>
+                        <a href="https://github.com/josuechagasp/todo-list-epica" target="_blank" class="btn btn-outline">
+                            <i class="fab fa-github"></i>
+                            Ver Código
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
-        
-        <ul class="project-features">
-            <li>Sistema de login e contas de usuário</li>
-            <li>Gamificação completa (XP, 7 levels, 8 badges)</li>
-            <li>Prioridades épicas com efeitos visuais</li>
-            <li>Countdown em tempo real para prazos</li>
-            <li>Sistema de busca inteligente</li>
-            <li>Filtros múltiplos avançados</li>
-            <li>Dashboard visual interativo</li>
-            <li>Animações e micro-interações</li>
-        </ul>
-        
-        <div class="cta-buttons">
-            <a href="https://josuechagasp.github.io/todo-list-epica" target="_blank" class="btn btn-primary">
-                <i class="fas fa-play"></i>
-                Demo Ao Vivo
-            </a>
-            <a href="https://github.com/josuechagasp/todo-list-epica" target="_blank" class="btn btn-outline">
-                <i class="fab fa-github"></i>
-                Ver Código
-            </a>
-        </div>
-    </div>
-</div>
+    </section>
 
     <!-- Skills Section -->
     <section id="skills">
@@ -946,6 +994,18 @@
         document.querySelectorAll('.project-card, .skill-category, .stat-item').forEach(el => {
             observer.observe(el);
         });
+
+        // Verificar se a imagem de perfil existe e aplicar classe
+        const heroAvatar = document.querySelector('.hero-avatar');
+        const img = new Image();
+        img.onload = function() {
+            heroAvatar.classList.add('with-image');
+        };
+        img.onerror = function() {
+            // Imagem não encontrada, manter o ícone padrão
+            console.log('Imagem de perfil não encontrada, usando ícone padrão');
+        };
+        img.src = 'foto-perfil.jpeg';
     </script>
 </body>
 </html>
